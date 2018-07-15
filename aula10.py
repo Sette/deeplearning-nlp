@@ -3,7 +3,8 @@
 # https://udemy.com/natural-language-processing-with-deep-learning-in-python
 from __future__ import print_function, division
 from builtins import range
-
+# Note: you may need to update your version of future
+# sudo pip install -U future
 
 
 import sys
@@ -30,7 +31,7 @@ class GloveVectorizer:
     word2vec = {}
     embedding = []
     idx2word = []
-    with open('../large_files/glove.6B/glove.6B.50d.txt') as f:
+    with open('/home/bruno/w2v/glove.6B/glove.6B.50d.txt') as f:
       # is just a space-separated text file in the format:
       # word vec[0] vec[1] vec[2] ...
       for line in f:
@@ -82,7 +83,7 @@ class Word2VecVectorizer:
   def __init__(self):
     print("Loading in word vectors...")
     self.word_vectors = KeyedVectors.load_word2vec_format(
-      '../large_files/GoogleNews-vectors-negative300.bin',
+      '/home/bruno/w2v/Google/GoogleNews-vectors-negative300.bin',
       binary=True
     )
     print("Finished loading in word vectors")
@@ -92,7 +93,6 @@ class Word2VecVectorizer:
 
   def transform(self, data):
     # determine the dimensionality of vectors
-    v = self.word_vectors.get_vector('king')
     self.D = v.shape[0]
 
     X = np.zeros((len(data), self.D))
@@ -141,3 +141,5 @@ model = RandomForestClassifier(n_estimators=200)
 model.fit(Xtrain, Ytrain)
 print("train score:", model.score(Xtrain, Ytrain))
 print("test score:", model.score(Xtest, Ytest))
+
+
